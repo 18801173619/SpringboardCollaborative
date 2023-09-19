@@ -58,6 +58,12 @@
 			<artifactId>spring-cloud-aws-starter-dynamodb</artifactId>
 			<version>${spring.cloud.aws.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
