@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.15</version>
+		<version>3.0.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -17,11 +17,18 @@
 
 	<properties>
 		<java.version>11</java.version>
-		<spring.cloud.aws.version>2.4.4</spring.cloud.aws.version>
+		<spring.cloud.aws.version>3.0.2</spring.cloud.aws.version>
 		<aws-java-sdk.version>2.20.149</aws-java-sdk.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>software.amazon.awssdk</groupId>
+			<artifactId>aws-sdk-java</artifactId>
+			<version>${aws-java-sdk.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -36,29 +43,22 @@
 		<!-- Spring Cloud AWS -->
 		<dependency>
 			<groupId>io.awspring.cloud</groupId>
-			<artifactId>spring-cloud-starter-aws</artifactId>
+			<artifactId>spring-cloud-aws-dependencies</artifactId>
 			<version>${spring.cloud.aws.version}</version>
+			<type>pom</type>
+			<scope>import</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>io.awspring.cloud</groupId>
-			<artifactId>spring-cloud-aws-autoconfigure</artifactId>
+			<artifactId>spring-cloud-aws-starter</artifactId>
+			<version>${spring.cloud.aws.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.awspring.cloud</groupId>
+			<artifactId>spring-cloud-aws-starter-dynamodb</artifactId>
 			<version>${spring.cloud.aws.version}</version>
 		</dependency>
 	</dependencies>
-
-	<!-- Amazon SDK -->
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>software.amazon.awssdk</groupId>
-				<artifactId>bom</artifactId>
-				<version>${aws-java-sdk.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 
 	<build>
 		<plugins>
