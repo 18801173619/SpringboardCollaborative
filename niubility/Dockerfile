@@ -1,9 +1,15 @@
+FROM maven:3.8.4-openjdk-17-slim AS build
+
+WORKDIR /app
+
+COPY pom.xml .
+RUN mvn dependency:go-offline
+COPY . .
+RUN mvn package -DskipTests
 FROM amazoncorretto:17
+WOKDIR /app
+
+COPY --from=build /app/target/ java -jar target/niubility-0.0.1-SNAPSHOT.jar ./app/jar
 
 EXPOSE 8080
-
-COPY target/niubility-1.0-SNAPSHOT.jar /opt/demo.jar
-
-WOKDIR /opt/
-
-ENTRYPOINT exec java -jar /opt/demo.jar
+CMD [ "java", "-jar","app.jar" ]
