@@ -1,10 +1,12 @@
 package org.tsc;
 
 import io.awspring.cloud.dynamodb.DynamoDbOperations;
+import io.awspring.cloud.dynamodb.DynamoDbTableNameResolver;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.tsc.config.CustomDynamoDbTableNameResolver;
 import org.tsc.model.Recipient;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
 import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
@@ -30,7 +32,7 @@ public class NiubilityApplication {
 	}
 
 	@Bean
-	ApplicationRunner applicationRunner(DynamoDbOperations dynamoDbOperations,
+	public ApplicationRunner applicationRunner(DynamoDbOperations dynamoDbOperations,
 										DynamoDbEnhancedClient dynamoDbEnhancedClient) {
 		return args -> {
 			ListTablesResponse response = null;
@@ -38,10 +40,15 @@ public class NiubilityApplication {
 			response = ddb.listTables(request);
 			List<String> tableNames = response.tableNames();
 
-			if (!tableNames.contains("Recipient")) {
-				dynamoDbEnhancedClient.table("Recipient", TableSchema.fromBean(Recipient.class)).createTable();
+			if (!tableNames.contains("RECIPIENT")) {
+				dynamoDbEnhancedClient.table("RECIPIENT", TableSchema.fromBean(Recipient.class)).createTable();
 			}
 		};
+	}
+
+	@Bean
+	public DynamoDbTableNameResolver dynamoDbTableNameResolver() {
+		return new CustomDynamoDbTableNameResolver();
 	}
 
 }
