@@ -1,8 +1,0 @@
-spring:
-  application:
-    name: Niubility
-  mvc:
-    patchmatch:
-      matching-strategy: ant_path_matcher
-
-

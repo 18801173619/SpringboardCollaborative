@@ -11,10 +11,11 @@ import java.sql.Date;
 public class Service {
 
     private String serviceId;
+    private Recipient recipient;
     private Date startDate;
     private Date endDate;
-    private String progress;
-    private boolean completed;
+    private ProgressEnum progress;
+    private ServiceTypeEnum type;
 
     @DynamoDbPartitionKey
     public String getServiceId() {

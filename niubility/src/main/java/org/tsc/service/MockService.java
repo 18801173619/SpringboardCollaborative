@@ -1,7 +1,11 @@
 package org.tsc.service;
 
-import org.springframework.stereotype.Service;
+import org.tsc.model.Navigator;
 
-@Service
+import java.util.List;
+
 public interface MockService {
+
+    List<Navigator> getNavigators();
+
 }

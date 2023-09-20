@@ -10,6 +10,7 @@ import org.tsc.model.Navigator;
 import org.tsc.model.Organization;
 import org.tsc.model.Recipient;
 import org.tsc.model.builder.RecipientBuilder;
+import org.tsc.service.MockService;
 import org.tsc.service.RecipientService;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
@@ -27,6 +28,9 @@ public class SpringboardCollaborativeController {
 
     @Autowired
     private RecipientService recipientService;
+
+    @Autowired
+    private MockService mockService;
 
     Region region = Region.US_EAST_1;
 
@@ -46,10 +50,10 @@ public class SpringboardCollaborativeController {
         return response.tableNames();
     }
 
-    @PostMapping(value = "/navigators")
+    @GetMapping(value = "/navigators")
     @Operation(summary = "Get Navigators", description = "get navigators for task assigning")
-    public List<Navigator> getNavigators(@RequestParam (value = "host") String host) {
-        return List.of(new Navigator());
+    public List<Navigator> getNavigators() {
+        return mockService.getNavigators();
     }
 
 

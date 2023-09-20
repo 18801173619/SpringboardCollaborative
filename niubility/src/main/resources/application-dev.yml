@@ -1,8 +1,0 @@
-#app:
-#  name: TSC Niubility
-#  api:
-#    title: Niubility Apis
-#    version: 1.0.0
-#    description: Niubility backend apis
-#    swagger:
-#      enable: true
