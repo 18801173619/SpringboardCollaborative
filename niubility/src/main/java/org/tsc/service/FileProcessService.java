@@ -1,10 +1,11 @@
 package org.tsc.service;
 
-import java.io.File;
+import org.springframework.core.io.Resource;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface FileProcessService {
 
-    void upload(File file);
+    void upload(MultipartFile multipartFile);
 
-    void download(File file);
+    Resource download(String key);
 }
