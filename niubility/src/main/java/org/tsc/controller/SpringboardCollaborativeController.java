@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.tsc.model.Navigator;
 import org.tsc.model.Organization;
 import org.tsc.model.Recipient;
+import org.tsc.model.builder.RecipientBuilder;
+import org.tsc.service.RecipientService;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.ListTablesRequest;
@@ -22,6 +24,9 @@ public class SpringboardCollaborativeController {
 
     @Autowired
     DynamoDbTemplate dynamoDbTemplate;
+
+    @Autowired
+    private RecipientService recipientService;
 
     Region region = Region.US_EAST_1;
 
@@ -38,7 +43,7 @@ public class SpringboardCollaborativeController {
         ListTablesRequest request = ListTablesRequest.builder().build();
         response = ddb.listTables(request);
 
-        return List.of("sfsdf");
+        return response.tableNames();
     }
 
     @PostMapping(value = "/navigators")
@@ -65,4 +70,21 @@ public class SpringboardCollaborativeController {
         String host, port, email, password, report_name;
     }
 
+
+    @GetMapping("/dnn/addRecipient")
+    public String addRecipient() {
+        Recipient recipient = (Recipient) RecipientBuilder.aRecipient()
+                .withRecipientId("20230920")
+                .withDescription("Test Description")
+                .withLastName("Test Last Name")
+                .build();
+        recipientService.saveRecipient(recipient);
+        return recipient.getDescription();
+    }
+
+    @GetMapping("/dnn/queryRecipient")
+    public String queryRecipient() {
+        Recipient recipient = recipientService.getRecipient("20230920");
+        return recipient.getDescription();
+    }
 }
