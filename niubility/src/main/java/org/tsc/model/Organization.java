@@ -1,11 +1,14 @@
 package org.tsc.model;
 
-import lombok.Data;
+import lombok.*;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
 
 @Data
 @DynamoDbBean
+@Getter
+@Setter
+@NoArgsConstructor
 public class Organization {
 
     private String orgId;
@@ -15,6 +18,7 @@ public class Organization {
     private String address;
     private String responsibility;
     private String description;
+
 
     @DynamoDbPartitionKey
     public String getOrgId() {
