@@ -1,11 +1,14 @@
 package org.tsc.model;
 
-import lombok.Data;
+import lombok.*;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
 
 @Data
 @DynamoDbBean
+@Getter
+@Setter
+@NoArgsConstructor
 public class TSCAdministrator extends Person {
 
     private String adminId;

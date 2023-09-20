@@ -1,6 +1,6 @@
 package org.tsc.model;
 
-import lombok.Data;
+import lombok.*;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
 
@@ -8,6 +8,9 @@ import java.sql.Date;
 
 @Data
 @DynamoDbBean
+@Getter
+@Setter
+@NoArgsConstructor
 public class Service {
 
     private String serviceId;

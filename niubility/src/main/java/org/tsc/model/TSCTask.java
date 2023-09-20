@@ -1,15 +1,13 @@
 package org.tsc.model;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
 
 @DynamoDbBean
 @Getter
 @Setter
-@Builder
+@NoArgsConstructor
 public class TSCTask {
 
     private String taskId;
